@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miss lalin, Can We talk?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f4e9ff, #e1d5ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+       .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        button {
+            padding: 15px 30px;
+            margin: 0 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+       .yes-btn {
+            background-color: #4caf50;
+            color: white;
+        }
+
+       .yes-btn:hover {
+            background-color: #388e3c;
+        }
+
+       .no-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+       .no-btn:hover {
+            background-color: #d32f2f;
+        }
+
+       .option-btn {
+            background-color: #2196f3;
+            color: white;
+        }
+
+       .option-btn:hover {
+            background-color: #1976d2;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 初始询问界面 -->
+    <div class="container" id="initial-container">
+        <h1>Miss lalin, Can We talk?</h1>
+        <p>Thinking about the beautiful memories we've shared, I realize how precious our relationship is. Every laugh, every hug, they all mean the world to me. I'm truly sorry for the times I made you sad. Please give us another chance to create more wonderful moments together. </p>
+        <button class="yes-btn" onclick="handleYes()">Yes, Let's talk!</button>
+        <button class="no-btn" onclick="handleNo()">Not Yet</button>
+    </div>
+    <!-- 选择和好后的第一层交互界面 -->
+    <div class="container" id="yes-first-container" style="display: none;">
+        <h1>Yay! Let's Build Our Future!</h1>
+        <p>Now that we're back together, would you like to share our lives or envision our future?</p>
+        <button class="option-btn" onclick="handleYesFirstOption('Share our lives')">Share our lives</button>
+        <button class="option-btn" onclick="handleYesFirstOption('Envision our future')">Envision our future</button>
+    </div>
+    <!-- 选择和好后分享生活的第二层交互界面 -->
+    <div class="container" id="yes-share-container" style="display: none;">
+        <h1>Sharing Our Lives Is So Sweet!</h1>
+        <p>Do you want to share recent joys or past stories?</p>
+        <button class="option-btn" onclick="handleYesShareOption('Recent joys')">Recent joys</button>
+        <button class="option-btn" onclick="handleYesShareOption('Past stories')">Past stories</button>
+    </div>
+    <!-- 选择和好后畅想未来的第二层交互界面 -->
+    <div class="container" id="yes-envision-container" style="display: none;">
+        <h1>Envisioning Our Future Is Exciting!</h1>
+        <p>Do you want to talk about career plans or family dreams?</p>
+        <button class="option-btn" onclick="handleYesEnvisionOption('Career plans')">Career plans</button>
+        <button class="option-btn" onclick="handleYesEnvisionOption('Family dreams')">Family dreams</button>
+    </div>
+    <!-- 选择和好后分享近期快乐的第三层交互界面 -->
+    <div class="container" id="yes-share-joys-container" style="display: none;">
+        <h1>Your Joys Make Me Happy!</h1>
+        <p>Is it a work - related joy or a hobby - related one?</p>
+        <button class="option-btn" onclick="handleYesShareJoysOption('Work - related joy')">Work - related joy</button>
+        <button class="option-btn" onclick="handleYesShareJoysOption('Hobby - related joy')">Hobby - related joy</button>
+    </div>
+    <!-- 选择和好后分享过去故事的第三层交互界面 -->
+    <div class="container" id="yes-share-stories-container" style="display: none;">
+        <h1>Those Past Stories Are Precious!</h1>
+        <p>Is it a childhood story or a travel story?</p>
+        <button class="option-btn" onclick="handleYesShareStoriesOption('Childhood story')">Childhood story</button>
+        <button class="option-btn" onclick="handleYesShareStoriesOption('Travel story')">Travel story</button>
+    </div>
+    <!-- 选择和好后谈论职业规划的第三层交互界面 -->
+    <div class="container" id="yes-envision-career-container" style="display: none;">
+        <h1>Let's Achieve Our Career Goals!</h1>
+        <p>Do you want to focus on short - term goals or long - term goals?</p>
+        <button class="option-btn" onclick="handleYesEnvisionCareerOption('Short - term goals')">Short - term goals</button>
+        <button class="option-btn" onclick="handleYesEnvisionCareerOption('Long - term goals')">Long - term goals</button>
+    </div>
+    <!-- 选择和好后谈论家庭梦想的第三层交互界面 -->
+    <div class="container" id="yes-envision-family-container" style="display: none;">
+        <h1>Our Family Dreams Are So Warm!</h1>
+        <p>Do you want to talk about home - building or raising kids?</p>
+        <button class="option-btn" onclick="handleYesEnvisionFamilyOption('Home - building')">Home - building</button>
+        <button class="option-btn" onclick="handleYesEnvisionFamilyOption('Raising kids')">Raising kids</button>
+    </div>
+    <!-- 选择不和好后的第一层交互界面 -->
+    <div class="container" id="no-first-container" style="display: none;">
+        <h1>I Understand...</h1>
+        <p>I'll wait for you. Maybe we can still do some light - hearted online things together. What do you think?</p>
+        <button class="option-btn" onclick="handleNoFirstOption('Share funny memes')">Share funny memes</button>
+        <button class="option-btn" onclick="handleNoFirstOption('Listen to music together')">Listen to music together</button>
+    </div>
+    <!-- 选择不和好后分享表情包的第二层交互界面 -->
+    <div class="container" id="no-meme-container" style="display: none;">
+        <h1>Sharing Memes Sounds Fun!</h1>
+        <p>What kind of memes do you like the most?</p>
+        <button class="option-btn" onclick="handleNoMemeOption('Animal memes')">Animal memes</button>
+        <button class="option-btn" onclick="handleNoMemeOption('Anime memes')">Anime memes</button>
+    </div>
+    <!-- 选择不和好后听音乐的第二层交互界面 -->
+    <div class="container" id="no-music-container" style="display: none;">
+        <h1>Let's Listen to Music!</h1>
+        <p>What genre of music do you prefer?</p>
+        <button class="option-btn" onclick="handleNoMusicOption('Pop')">Pop</button>
+        <button class="option-btn" onclick="handleNoMusicOption('Rock')">Rock</button>
+    </div>
+    <!-- 选择不和好后分享动物表情包的第三层交互界面 -->
+    <div class="container" id="no-meme-animal-container" style="display: none;">
+        <h1>Animal Memes Are Hilarious!</h1>
+        <p>Do you like dog memes or cat memes?</p>
+        <button class="option-btn" onclick="handleNoMemeAnimalOption('Dog memes')">Dog memes</button>
+        <button class="option-btn" onclick="handleNoMemeAnimalOption('Cat memes')">Cat memes</button>
+    </div>
+    <!-- 选择不和好后分享动漫表情包的第三层交互界面 -->
+    <div class="container" id="no-meme-anime-container" style="display: none;">
+        <h1>Anime Memes Are So Cool!</h1>
+        <p>Do you prefer action - anime memes or slice - of - life anime memes?</p>
+        <button class="option-btn" onclick="handleNoMemeAnimeOption('Action - anime memes')">Action - anime memes</button>
+        <button class="option-btn" onclick="handleNoMemeAnimeOption('Slice - of - life anime memes')">Slice - of - life anime memes</button>
+    </div>
+    <!-- 选择不和好后听流行音乐的第三层交互界面 -->
+    <div class="container" id="no-music-pop-container" style="display: none;">
+        <h1>Pop Music Is So Catchy!</h1>
+        <p>Do you want to listen to old - school pop or new - wave pop?</p>
+        <button class="option-btn" onclick="handleNoMusicPopOption('Old - school pop')">Old - school pop</button>
+        <button class="option-btn" onclick="handleNoMusicPopOption('New - wave pop')">New - wave pop</button>
+    </div>
+    <!-- 选择不和好后听摇滚音乐的第三层交互界面 -->
+    <div class="container" id="no-music-rock-container" style="display: none;">
+        <h1>Rock Music Rocks!</h1>
+        <p>Do you prefer classic rock or alternative rock?</p>
+        <button class="option-btn" onclick="handleNoMusicRockOption('Classic rock')">Classic rock</button>
+        <button class="option-btn" onclick="handleNoMusicRockOption('Alternative rock')">Alternative rock</button>
+    </div>
+    <script>
+        function handleYes() {
+            document.getElementById('initial-container').style.display = 'none';
+            document.getElementById('yes-first-container').style.display = 'block';
+        }
+
+        function handleNo() {
+            document.getElementById('initial-container').style.display = 'none';
+            document.getElementById('no-first-container').style.display = 'block';
+        }
+
+        function handleYesFirstOption(option) {
+            document.getElementById('yes-first-container').style.display = 'none';
+            if (option === 'Share our lives') {
+                document.getElementById('yes-share-container').style.display = 'block';
+            } else if (option === 'Envision our future') {
+                document.getElementById('yes-envision-container').style.display = 'block';
+            }
+        }
+
+        function handleYesShareOption(option) {
+            document.getElementById('yes-share-container').style.display = 'none';
+            if (option === 'Recent joys') {
+                document.getElementById('yes-share-joys-container').style.display = 'block';
+            } else if (option === 'Past stories') {
+                document.getElementById('yes-share-stories-container').style.display = 'block';
+            }
+        }
+
+        function handleYesEnvisionOption(option) {
+            document.getElementById('yes-envision-container').style.display = 'none';
+            if (option === 'Career plans') {
+                document.getElementById('yes-envision-career-container').style.display = 'block';
+            } else if (option === 'Family dreams') {
+                document.getElementById('yes-envision-family-container').style.display = 'block';
+            }
+        }
+
+        function handleYesShareJoysOption(option) {
+            alert(`I'm so happy to hear about your ${option.toLowerCase()}. Tell me more! 😊`);
+        }
+
+        function handleYesShareStoriesOption(option) {
+            alert(`Your ${option.toLowerCase()} must be full of charm. I can't wait to hear it. 🎧`);
+        }
+
+        function handleYesEnvisionCareerOption(option) {
+            alert(`Let's work hard towards our ${option.toLowerCase()}. We'll achieve them! 💪`);
+        }
+
+        function handleYesEnvisionFamilyOption(option) {
+            alert(`Our ${option.toLowerCase()} will surely come true. It's so heart - warming. 💕`);
+        }
+
+        function handleNoFirstOption(option) {
+            document.getElementById('no-first-container').style.display = 'none';
+            if (option === 'Share funny memes') {
+                document.getElementById('no-meme-container').style.display = 'block';
+            } else if (option === 'Listen to music together') {
+                document.getElementById('no-music-container').style.display = 'block';
+            }
+        }
+
+        function handleNoMemeOption(option) {
+            document.getElementById('no-meme-container').style.display = 'none';
+            if (option === 'Animal memes') {
+                document.getElementById('no-meme-animal-container').style.display = 'block';
+            } else if (option === 'Anime memes') {
+                document.getElementById('no-meme-anime-container').style.display = 'block';
+            }
+        }
+
+        function handleNoMusicOption(option) {
+            document.getElementById('no-music-container').style.display = 'none';
+            if (option === 'Pop') {
+                document.getElementById('no-music-pop-container').style.display = 'block';
+            } else if (option === 'Rock') {
+                document.getElementById('no-music-rock-container').style.display = 'block';
+            }
+        }
+
+        function handleNoMemeAnimalOption(option) {
+            alert(`I love ${option} too! Let's share them right away. 😂`);
+        }
+
+        function handleNoMemeAnimeOption(option) {
+            alert(` ${option} are really cool! Let's start sharing. 😎`);
+        }
+
+        function handleNoMusicPopOption(option) {
+            alert(` ${option} is so catchy! Let's pick some songs. 🎵`);
+        }
+
+        function handleNoMusicRockOption(option) {
+            alert(` ${option} rocks! Let's find some great tracks. 🤘`);
+        }
+    </script>
+</body>
+
+</html>
